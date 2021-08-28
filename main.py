@@ -12,17 +12,68 @@ headers = {
     'Accept-Encoding':'gzip'
     }
 i = 1
-while(i < 2000):
-    print("Try download pic " + str(i))
+while(i < 3000):
+    print("Downloading picture " + str(i))
     try:
-        r = requests.get('http://poster.fqtodo.cn/test' + str(i) + '.png', headers=headers)
+        r = requests.get('http://poster.fqtodo.cn/test' + str(i) + '.jpg', headers=headers)
         image = Image.open(BytesIO(r.content))
     except PIL.UnidentifiedImageError:
-        print("Try download pic " + str(i) + " failed.")
-        time.sleep(0.5)
-        i += 1
+        try:
+            r = requests.get('http://poster.fqtodo.cn/test' + str(i) + '.JPG', headers=headers)
+            image = Image.open(BytesIO(r.content))
+        except PIL.UnidentifiedImageError:
+            try:
+                r = requests.get('http://poster.fqtodo.cn/test' + str(i) + '.png', headers=headers)
+                image = Image.open(BytesIO(r.content))
+            except PIL.UnidentifiedImageError:
+                print("Download picture " + str(i) + " failed.")
+                time.sleep(0.3)
+                i += 1
+            else:
+                print("Download picture " + str(i) + " succeed")
+                image.save('E:/tomatodo/' + str(i) + '.png')
+                time.sleep(0.3)
+                i += 1
+        else:
+            print("Download picture " + str(i) + " succeed")
+            image.save('E:/tomatodo/' + str(i) + '.JPG')
+            time.sleep(0.3)
+            i += 1
     else:
-        print("Try download pic " + str(i) + " succeed")
-        image.save('E:/tomatodo/' + str(i) + '.png')
-        time.sleep(0.5)
+        print("Download picture " + str(i) + " succeed")
+        image.save('E:/tomatodo/' + str(i) + '.jpg')
+        time.sleep(0.3)
+        i += 1
+i = 1
+while(i < 3000):
+    print("Downloading picture " + str(i))
+    try:
+        r = requests.get('http://poster.fqtodo.cn/ab' + str(i) + '.jpg', headers=headers)
+        image = Image.open(BytesIO(r.content))
+    except PIL.UnidentifiedImageError:
+        try:
+            r = requests.get('http://poster.fqtodo.cn/ab' + str(i) + '.JPG', headers=headers)
+            image = Image.open(BytesIO(r.content))
+        except PIL.UnidentifiedImageError:
+            try:
+                r = requests.get('http://poster.fqtodo.cn/ab' + str(i) + '.png', headers=headers)
+                image = Image.open(BytesIO(r.content))
+            except PIL.UnidentifiedImageError:
+                print("Download picture " + str(i) + " failed.")
+                time.sleep(0.3)
+                i += 1
+            else:
+                print("Download picture " + str(i) + " succeed")
+                image.save('E:/tomatodo/' + str(i) + '.png')
+                time.sleep(0.3)
+                i += 1
+        else:
+            print("Download picture " + str(i) + " succeed")
+            image.save('E:/tomatodo/' + str(i) + '.JPG')
+            time.sleep(0.3)
+            i += 1
+    else:
+        print("Download picture " + str(i) + " succeed")
+        image.save('E:/tomatodo/' + str(i) + '.jpg')
+        time.sleep(0.3)
         i += 1
